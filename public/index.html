@@ -27,7 +27,87 @@
     </div>
 </nav>
 
-<div class="container mt-5">
+<div class="container mt-4">
+
+    <div class="row g-3 text-center">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow dashboard-card">
+
+                <div class="card-body">
+
+                    <i class="fa-solid fa-users fa-2x text-primary mb-3"></i>
+
+                    <h2 id="totalEmployees">0</h2>
+
+                    <p>Total Employees</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow dashboard-card">
+
+                <div class="card-body">
+
+                    <i class="fa-solid fa-user-check fa-2x text-success mb-3"></i>
+
+                    <h2 id="activeEmployees">0</h2>
+
+                    <p>Active</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow dashboard-card">
+
+                <div class="card-body">
+
+                    <i class="fa-solid fa-user-xmark fa-2x text-danger mb-3"></i>
+
+                    <h2 id="inactiveEmployees">0</h2>
+
+                    <p>Inactive</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="card shadow dashboard-card">
+
+                <div class="card-body">
+
+                    <i class="fa-solid fa-building fa-2x text-warning mb-3"></i>
+
+                    <h2 id="departments">0</h2>
+
+                    <p>Departments</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container mt-4">
 
     <div class="row mb-4">
 
@@ -85,8 +165,50 @@
 
 <input id="age" class="form-control mb-3" placeholder="Age">
 
-<input id="image" class="form-control mb-3" placeholder="Image URL">
+<select id="department" class="form-select mb-3">
 
+    <option value="IT">IT</option>
+
+    <option value="HR">HR</option>
+
+    <option value="Finance">Finance</option>
+
+    <option value="Sales">Sales</option>
+
+    <option value="Operations">Operations</option>
+
+</select>
+
+<input id="position"
+
+class="form-control mb-3"
+
+placeholder="Position">
+
+<select id="status"
+
+class="form-select mb-3">
+
+<option value="Active">
+
+Active
+
+</option>
+
+<option value="Inactive">
+
+Inactive
+
+</option>
+
+</select>
+<label class="form-label">Employee Image</label>
+
+<input
+    type="file"
+    id="image"
+    class="form-control"
+    accept="image/*">
 </div>
 
 <div class="modal-footer">
@@ -107,7 +229,23 @@ Save
 
 </div>
 
+<footer class="text-center mt-5 mb-4">
+
+    <hr>
+
+    <h6>Employee Management System v1.1</h6>
+
+    <p class="text-muted">
+
+        Powered by Node.js • Docker • Kubernetes
+
+    </p>
+
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="js/app.js"></script>
 

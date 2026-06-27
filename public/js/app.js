@@ -14,6 +14,8 @@ async function loadUsers() {
 
     displayUsers(allUsers);
 
+    updateDashboard(allUsers);
+
 }
 
 // =====================
@@ -25,6 +27,8 @@ function displayUsers(users) {
     const container = document.getElementById("users");
 
     container.innerHTML = "";
+
+    updateDashboard(users);
 
     if (users.length === 0) {
 
@@ -38,6 +42,24 @@ function displayUsers(users) {
         return;
 
     }
+
+function updateDashboard(users){
+
+document.getElementById("totalEmployees").innerText = users.length;
+
+const active = users.filter(u=>u.status==="Active").length;
+
+const inactive = users.filter(u=>u.status==="Inactive").length;
+
+const departments = new Set(users.map(u=>u.department)).size;
+
+document.getElementById("activeEmployees").innerText = active;
+
+document.getElementById("inactiveEmployees").innerText = inactive;
+
+document.getElementById("departments").innerText = departments;
+
+}
 
     users.forEach(user => {
 
@@ -72,6 +94,32 @@ ${user.email}
 <i class="fa-solid fa-cake-candles"></i>
 
 Age : ${user.age}
+
+</p>
+
+<p>
+
+<i class="fa-solid fa-building"></i>
+
+${user.department}
+
+</p>
+
+<p>
+
+<i class="fa-solid fa-briefcase"></i>
+
+${user.position}
+
+</p>
+
+<p>
+
+<span class="badge ${user.status === 'Active' ? 'bg-success' : 'bg-danger'}">
+
+${user.status}
+
+</span>
 
 </p>
 
@@ -122,54 +170,66 @@ Delete
 async function addUser() {
 
     const name = document.getElementById("name").value;
-
     const email = document.getElementById("email").value;
-
     const age = document.getElementById("age").value;
+    const department = document.getElementById("department").value;
+    const position = document.getElementById("position").value;
+    const status = document.getElementById("status").value;
 
-    const image = document.getElementById("image").value;
+    const image = document.getElementById("image").files[0];
 
     if (!name || !email || !age) {
 
-        alert("Please Fill All Fields");
+        Swal.fire({
+            icon: "warning",
+            title: "Missing Data",
+            text: "Please fill all required fields"
+        });
 
         return;
-
     }
 
-    await fetch(api, {
+    const formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("age", age);
+    formData.append("department", department);
+    formData.append("position", position);
+    formData.append("status", status);
+
+    if (image) {
+        formData.append("image", image);
+    }
+
+    const res = await fetch(api, {
 
         method: "POST",
 
-        headers: {
-
-            "Content-Type": "application/json"
-
-        },
-
-        body: JSON.stringify({
-
-            name,
-
-            email,
-
-            age,
-
-            image
-
-        })
+        body: formData
 
     });
 
-    document.getElementById("name").value = "";
+    if (res.ok) {
 
-    document.getElementById("email").value = "";
+        Swal.fire({
+            icon: "success",
+            title: "Employee Added",
+            timer: 1500,
+            showConfirmButton: false
+        });
 
-    document.getElementById("age").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("department").value = "";
+        document.getElementById("position").value = "";
+        document.getElementById("status").value = "Active";
+        document.getElementById("image").value = "";
 
-    document.getElementById("image").value = "";
+        loadUsers();
 
-    loadUsers();
+    }
 
 }
 
@@ -177,17 +237,46 @@ async function addUser() {
 // Delete
 // =====================
 
-async function deleteUser(id) {
+async function deleteUser(id){
 
-    if (!confirm("Delete this employee ?")) return;
+const result = await Swal.fire({
 
-    await fetch(api + "/" + id, {
+title:"Delete Employee?",
 
-        method: "DELETE"
+text:"This action cannot be undone.",
 
-    });
+icon:"warning",
 
-    loadUsers();
+showCancelButton:true,
+
+confirmButtonColor:"#d33",
+
+confirmButtonText:"Delete"
+
+});
+
+if(!result.isConfirmed)
+return;
+
+await fetch(api+"/"+id,{
+
+method:"DELETE"
+
+});
+
+await loadUsers();
+
+Swal.fire({
+
+icon:"success",
+
+title:"Deleted Successfully",
+
+timer:1500,
+
+showConfirmButton:false
+
+});
 
 }
 

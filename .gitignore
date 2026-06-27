@@ -1,1 +1,28 @@
-gitignore
+# Node Modules
+node_modules/
+
+# Environment Variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Uploads (اختياري)
+public/uploads/*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Docker
+docker-compose.override.yml
+
+
+*.png
+*.jpg
+*.jpeg
