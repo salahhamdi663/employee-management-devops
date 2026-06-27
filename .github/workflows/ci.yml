@@ -1,0 +1,39 @@
+name: Employee Management CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/postgresql
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Check Node Version
+        run: node -v
+
+      - name: Check NPM Version
+        run: npm -v
+
+      - name: Build Docker Image
+        run: docker build -t employee-app .
