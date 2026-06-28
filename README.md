@@ -2,8 +2,6 @@
 
 A complete DevOps project demonstrating CI/CD, containerization, Kubernetes orchestration, monitoring, and application metrics.
     
-# 🏗 Architecture
+#  Architecture
 
-<p align="center">
-    <img src="/home/master/project/docs/arch.png" width="950">
-</p>
+![Uploading arch.png…]()
