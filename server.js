@@ -1,4 +1,5 @@
 require("dotenv").config();
+const client = require("prom-client");
 
 const express = require("express");
 const cors = require("cors");
@@ -12,10 +13,45 @@ const employeeRoutes = require("./routes/employeeRoutes");
 const app = express();
 
 // =========================
+// Prometheus Metrics
+// =========================
+
+const register = new client.Registry();
+
+client.collectDefaultMetrics({
+    register
+});
+
+const httpRequestsTotal = new client.Counter({
+    name: "employee_app_http_requests_total",
+    help: "Total HTTP Requests",
+    labelNames: ["method", "route", "status"]
+});
+
+register.registerMetric(httpRequestsTotal);
+
+// =========================
 // Middlewares
 // =========================
 
 app.use(cors());
+app.use((req, res, next) => {
+
+    res.on("finish", () => {
+
+        httpRequestsTotal.inc({
+
+            method: req.method,
+            route: req.path,
+            status: res.statusCode
+
+        });
+
+    });
+
+    next();
+
+});
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -97,43 +133,12 @@ app.get("/version", (req, res) => {
 
 app.get("/metrics", async (req, res) => {
 
-    try {
+    res.set("Content-Type", register.contentType);
 
-        const result = await pool.query(
-
-            "SELECT COUNT(*) FROM employees"
-
-        );
-
-        const memory = process.memoryUsage();
-
-        res.json({
-
-            employees: result.rows[0].count,
-
-            uptime: Math.floor(process.uptime()),
-
-            hostname: os.hostname(),
-
-            node_version: process.version,
-
-            memory_rss: Math.round(memory.rss / 1024 / 1024) + " MB",
-
-            heap_used: Math.round(memory.heapUsed / 1024 / 1024) + " MB"
-
-        });
-
-    } catch (err) {
-
-        res.status(500).json({
-
-            message: err.message
-
-        });
-
-    }
+    res.end(await register.metrics());
 
 });
+
 
 // =========================
 // 404
