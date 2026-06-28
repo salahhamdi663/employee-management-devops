@@ -152,6 +152,31 @@ Prometheus automatically discovers Kubernetes services and continuously scrapes 
   <img src="docs/pro.jpg" width="900">
 </p>
 
+## GitHub Actions Result
+
+<p align="center">
+    <img src="docs/cicd.jpg" width="900">
+</p>
+
+##  Project Structure
+
+
+project
+├── config/
+├── controllers/
+├── routes/
+├── public/
+├── k8s/
+├── .github/workflows/
+├── Dockerfile
+├── package.json
+└── server.js
 
 
 
+## Author
+
+Yousef Ebrahim Zakaria 
+Salah Hamdi Ibrahim 
+Omar Badr ElGendy
+Yousef Nabil Shahin
