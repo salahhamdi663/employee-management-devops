@@ -5,5 +5,5 @@ A complete DevOps project demonstrating CI/CD, containerization, Kubernetes orch
 # 🏗 Architecture
 
 <p align="center">
-    <img src="docs/arch.png" width="950">
+    <img src="/home/master/project/docs/arch.png" width="950">
 </p>
