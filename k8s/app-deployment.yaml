@@ -6,7 +6,7 @@ metadata:
   namespace: employee-app
 
 spec:
-  replicas: 1
+  replicas: 3
 
   selector:
     matchLabels:
@@ -21,7 +21,7 @@ spec:
       containers:
         - name: employee-app
 
-          image: salahhamdy110/employee-management:v2
+          image: salahhamdy110/employee-management:v6
           imagePullPolicy: Always
 
           ports:
