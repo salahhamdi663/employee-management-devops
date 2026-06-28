@@ -1,5 +1,9 @@
-# employee-management-devops
-# employee-management-devops
+# Employee Management System on Kubernetes
 
-YOUSEF
-salah
+A complete DevOps project demonstrating CI/CD, containerization, Kubernetes orchestration, monitoring, and application metrics.
+    
+# 🏗 Architecture
+
+<p align="center">
+    <img src="docs/arch.png" width="950">
+</p>
