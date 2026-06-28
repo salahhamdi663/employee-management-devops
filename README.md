@@ -173,10 +173,9 @@ project
 └── server.js
 
 
+## ‍ Authors
 
-## Author
-
-Yousef Ebrahim Zakaria 
-Salah Hamdi Ibrahim 
-Omar Badr ElGendy
-Yousef Nabil Shahin
+- Yousef Ebrahim Zakaria
+- Salah Hamdi Ibrahim Omar
+- Badr ElGendy
+- Yousef Nabil Shahin
