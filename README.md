@@ -158,19 +158,61 @@ Prometheus automatically discovers Kubernetes services and continuously scrapes 
     <img src="docs/cicd.jpg" width="900">
 </p>
 
-##  Project Structure
+#  Project Structure
 
-
-project
+```text
+employee-management-devops/
+│
+├── .github/
+│   └── workflows/
+│       └── build-deploy.yml
+│
 ├── config/
+│   └── db.js
+│
 ├── controllers/
+│   └── employeeController.js
+│
 ├── routes/
+│   └── employeeRoutes.js
+│
 ├── public/
+│   ├── css/
+│   ├── js/
+│   ├── uploads/
+│   └── index.html
+│
+├── docs/
+│   ├── arch.png
+│   ├── ci.jpg
+│   ├── k8s-global.jpg
+│   ├── node-exporter.jpg
+│   └── pro.jpg
+│
 ├── k8s/
-├── .github/workflows/
+│   ├── namespace.yaml
+│   ├── app-deployment.yaml
+│   ├── app-service.yaml
+│   ├── postgres-deployment.yaml
+│   ├── postgres-service.yaml
+│   ├── ingress.yaml
+│   ├── uploads-pv.yaml
+│   ├── uploads-pvc.yaml
+│   ├── postgres-pv.yaml
+│   ├── postgres-pvc.yaml
+│   ├── postgres-secret.yaml
+│   └── servicemonitor.yaml
+│
 ├── Dockerfile
+├── docker-compose.yml
 ├── package.json
-└── server.js
+├── package-lock.json
+├── server.js
+├── init.sql
+├── README.md
+├── .dockerignore
+└── .gitignore
+
 
 
 ## ‍ Authors
