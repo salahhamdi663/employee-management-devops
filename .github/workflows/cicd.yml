@@ -29,16 +29,16 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/employee-management:v2 .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/employee-management:v3 .
 
       - name: Push Docker Image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/employee-management:v2
+          docker push ${{ secrets.DOCKER_USERNAME }}/employee-management:v3
 
       - name: Deploy to Kubernetes
         run: |
           kubectl set image deployment/employee-app \
-          employee-app=${{ secrets.DOCKER_USERNAME }}/employee-management:v2 \
+          employee-app=${{ secrets.DOCKER_USERNAME }}/employee-management:v3 \
           -n employee-app
 
           kubectl rollout status deployment/employee-app -n employee-app
